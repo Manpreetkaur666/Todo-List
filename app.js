@@ -3,16 +3,17 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const _ = require('lodash');
 const date = require(__dirname+"/date.js");
+require('dotenv').config({path: '.env'});
 
 
 const app = express();
-
+const DATABASE_URL = process.env.DATABASE_URL;
 const day = date();
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
-mongoose.connect('mongodb+srv://admin-manpreet:Tinu1994@cluster0.qz3xl6i.mongodb.net/todolistDB');
+mongoose.connect(DATABASE_URL);
 
 /************************************** Items Schema *************************************/
 // Creating a schema
