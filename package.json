@@ -1,7 +1,6 @@
 {
   "name": "todolist-v1",
   "version": "1.0.0",
-  "homepage": "https://frabjous-klepon-413d61.netlify.app/",
   "description": "todo App",
   "main": "app.js",
   "scripts": {
