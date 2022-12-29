@@ -1,4 +1,5 @@
 const express = require('express');
+const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const _ = require('lodash');
@@ -8,6 +9,7 @@ require('dotenv').config({path: '.env'});
 
 const app = express();
 const DATABASE_URL = process.env.DATABASE_URL;
+const client = new MongoClient(DATABASE_URL);
 const day = date();
 
 app.set('view engine', 'ejs');
@@ -164,6 +166,14 @@ if (port == null || port == "") {
   port = 3000;
 }
 
-app.listen(port,function(){
-    console.log("The server is running on port: 3000");
+client.connect(err => {
+  if(err){ console.error(err); return false;}
+  // connection to mongo is successful, listen for requests
+  app.listen(port, () => {
+      console.log("listening for requests");
+  })
 });
+
+// app.listen(port,function(){
+//     console.log("The server is running on port: 3000");
+// });
